@@ -1,8 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
 
-import bloPostRouter from './routes/post-routes';
-import userRouter from './routes/post-routes';
+import bloPostRouter from './routes/post-routes.js';
+import userRouter from './routes/post-routes.js';
 
 const PORT = 5000;
 

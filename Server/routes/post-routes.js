@@ -1,4 +1,13 @@
 import express from "express";
+import {
+    getAllBlogPosts,
+    newBlogPost,
+    editBlogPost,
+    getPostByID,
+    removeBlogPost,
+    getUserByID,
+} from '../controllers/blog-post-controller.js';
+  
 
 const postRouter = express.Router();
 
