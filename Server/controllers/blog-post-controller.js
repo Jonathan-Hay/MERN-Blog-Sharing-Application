@@ -1,4 +1,6 @@
-export const getAllBlogPosts = async (req, res, next) => {};
+export const getAllBlogPosts = async (req, res, next) => {
+  res.send("getting all blog posts");
+};
 export const newBlogPost = async (req, res, next) => {};
 export const editBlogPost = async (req, res, next) => {};
 export const getPostByID = async (req, res, next) => {};

@@ -2,16 +2,19 @@ import express from "express";
 import mongoose from "mongoose";
 
 import bloPostRouter from './routes/post-routes.js';
-import userRouter from './routes/post-routes.js';
+import userRouter from './routes/user-routes.js';
 
 const PORT = 5000;
 
 const app = express();
+
 app.use(express.json());
+
+
+
 app.use("/user", userRouter);
 app.use("/post", bloPostRouter);
 
-app.use(express.json());
 
 mongoose.set("strictQuery", false);
 
