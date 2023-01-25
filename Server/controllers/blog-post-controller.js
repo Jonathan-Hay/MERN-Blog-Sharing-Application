@@ -7,9 +7,6 @@ export const getAllBlogPosts = async (req, res, next) => {
 
   try {
     allBlogPosts = await BlogPost.find().populate("author");
-
-    let test = await BlogPost.find();
-    console.log(test);
   } catch (e) {
     return console.log(e);
   }
@@ -36,7 +33,7 @@ export const newBlogPost = async (req, res, next) => {
     return res.status(400).json({ message: "Unable to find User By This ID" });
   }
 
-  const blog = new Blog({
+  const blog = new BlogPost({
     title,
     text,
     image,
@@ -57,8 +54,49 @@ export const newBlogPost = async (req, res, next) => {
 
   return res.status(200).json({ blog });
 };
-export const editBlogPost = async (req, res, next) => {};
-export const getPostByID = async (req, res, next) => {};
+
+export const editBlogPost = async (req, res, next) => {
+  console.log("EDITING");
+  const { title, text } = req.body;
+
+  const blogID = req.params.id;
+
+  let blogPost;
+
+  try {
+    blogPost = await BlogPost.findByIdAndUpdate(blogID, {
+      title,
+      text,
+    });
+  } catch (e) {
+    console.log(e);
+  }
+
+  if (!blogPost) {
+    res.status(500).json({ message: "Post not found!" });
+  }
+
+  return res.status(200).json({ blogPost });
+};
+
+export const getPostByID = async (req, res, next) => {
+  const id = req.params.id;
+
+  let blogPost;
+
+  try {
+    blogPost = await BlogPost.findById(id);
+  } catch (e) {
+    console.log(e);
+  }
+
+  if (!blogPost) {
+    res.status(404).json({ message: "Blog post not found! " });
+  }
+
+  return res.status(200).json({blogPost})
+};
+
+
 export const removeBlogPost = async (req, res, next) => {};
 export const getUserByID = async (req, res, next) => {};
-export const getAllBlogs = async (req, res, next) => {};
