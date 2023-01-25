@@ -3,11 +3,11 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const blogSchema = new Schema({
-  name: {
+  title: {
     type: String,
     required: true,
   },
-  description: {
+  text: {
     type: String,
     required: true,
   },
