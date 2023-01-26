@@ -69,11 +69,11 @@ export const editBlogPost = async (req, res, next) => {
       text,
     });
   } catch (e) {
-    console.log(e);
+    return console.log(e);
   }
 
   if (!blogPost) {
-    res.status(500).json({ message: "Post not found!" });
+    return res.status(500).json({ message: "Post not found!" });
   }
 
   return res.status(200).json({ blogPost });
@@ -87,16 +87,51 @@ export const getPostByID = async (req, res, next) => {
   try {
     blogPost = await BlogPost.findById(id);
   } catch (e) {
+    return console.log(e);
+  }
+
+  if (!blogPost) {
+    return res.status(404).json({ message: "Blog post not found! " });
+  }
+
+  return res.status(200).json({ blogPost });
+};
+
+export const removeBlogPost = async (req, res, next) => {
+  const id = req.params.id;
+
+  let blogPost;
+
+  try {
+    blogPost = await BlogPost.findByIdAndDelete(id).populate("author");
+    await blogPost.author.blogs.pull(blogPost);
+
+    await blogPost.author.save();
+  } catch (e) {
     console.log(e);
   }
 
   if (!blogPost) {
-    res.status(404).json({ message: "Blog post not found! " });
+    res.status(500).json({ message: "Post not found" });
   }
 
-  return res.status(200).json({blogPost})
+  return res.status(200).json({ message: "Deleted blog post!" });
 };
 
+export const getUserByID = async (req, res, next) => {
+  const userID = req.params.id;
 
-export const removeBlogPost = async (req, res, next) => {};
-export const getUserByID = async (req, res, next) => {};
+  let userAndBlogs;
+
+  try {
+    userAndBlogs = await User.findById(userID).populate("blogs");
+  } catch (e) {
+    return console.log(e);
+  }
+
+  if (!userAndBlogs) {
+    return res.status(404).json({ message: "Not found!" });
+  }
+
+  return res.status(200).json({ userAndBlogs });
+};
