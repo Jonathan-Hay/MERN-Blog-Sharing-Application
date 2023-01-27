@@ -11,7 +11,18 @@ function Header() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" component="div">
+          <Typography
+            noWrap
+            component="a"
+            href="/"
+            variant="h6"
+            sx={{
+              textDecoration: "none",
+              color: "inherit",
+              letterSpacing: '.35rem',
+              fontWeight: 600,
+            }}
+          >
             YouBlog
           </Typography>
 
@@ -24,15 +35,24 @@ function Header() {
             <Button LinkComponent={Link} to="/blog-feed" color="warning">
               Blog Feed
             </Button>
-            <Button LinkComponent={Link} to="/my-blogs" color="warning">My Blogs</Button>
-            <Button LinkComponent={Link} to="/blogs/new" color="warning">New Blog</Button>
-
+            <Button LinkComponent={Link} to="/my-blogs" color="warning">
+              My Blogs
+            </Button>
+            <Button LinkComponent={Link} to="/blogs/new" color="warning">
+              New Blog
+            </Button>
           </Box>
 
           <Box display="flex" marginLeft="auto">
-            <Button LinkComponent={Link} to="/auth" color="warning">Logout</Button>
-            <Button LinkComponent={Link} to="/auth" color="warning">Login</Button>
-            <Button LinkComponent={Link} to="/auth" color="warning">Signup</Button>
+            <Button LinkComponent={Link} to="/auth" color="warning">
+              Logout
+            </Button>
+            <Button LinkComponent={Link} to="/auth" color="warning">
+              Login
+            </Button>
+            <Button LinkComponent={Link} to="/auth" color="warning">
+              Signup
+            </Button>
           </Box>
         </Toolbar>
       </AppBar>

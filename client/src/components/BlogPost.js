@@ -18,6 +18,9 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 
 export default function BlogPost(props) {
+
+  const avatarString = props.author ? props.author.charAt(0) : "";
+
   return (
     <Card
       sx={{
@@ -33,8 +36,8 @@ export default function BlogPost(props) {
     >
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: "red" }} aria-label="recipe">
-            "jh"
+          <Avatar sx={{ bgcolor: "blue" }} aria-label="recipe">
+            {avatarString}
           </Avatar>
         }
         action={
@@ -51,22 +54,18 @@ export default function BlogPost(props) {
 
       <CardMedia
         sx={{ height: 140 }}
-        image="https://www.denofgeek.com/wp-content/uploads/2022/08/The-Lord-of-the-Rings-Fellowship-movie-poster.jpg?resize=768%2C432"
+        image= {props.image}
         title="green iguana"
       />
 
+
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          Lizard
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small">Read</Button>
-      </CardActions>
+          <hr />
+          <br />
+          <Typography variant="body2" color="text.secondary">
+            <b>{props.author}</b> {": "} {props.text}
+          </Typography>
+        </CardContent>
     </Card>
   );
 }

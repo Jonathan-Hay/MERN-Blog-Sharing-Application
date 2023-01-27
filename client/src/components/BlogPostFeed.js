@@ -4,10 +4,7 @@ import axios from "axios";
 import BlogPost from "./BlogPost";
 
 const BlogPostFeed = () => {
-  const [blogPosts, setBlogPosts] = useState([
-    { title: "hi 1" },
-    { title: "hi2" },
-  ]);
+  const [blogPosts, setBlogPosts] = useState();
 
   const sendRequest = async () => {
     const res = await axios
@@ -15,18 +12,25 @@ const BlogPostFeed = () => {
       .catch((e) => console.log(e));
 
     const data = await res.data;
+    console.log(data);
     return data;
   };
 
   useEffect(() => {
     sendRequest().then((data) => setBlogPosts(data.allBlogPosts));
-  });
+  }, []);
 
   return (
     <React.Fragment>
-      {blogPosts.map((blogPost, index) => (
-        <BlogPost title={blogPost.title } />
-      ))}
+      {blogPosts &&
+        blogPosts.map((blogPost, index) => (
+          <BlogPost
+            title={blogPost.title}
+            author={blogPost.author.name}
+            text={blogPost.text}
+            image={blogPost.image}
+          />
+        ))}
     </React.Fragment>
   );
 };
