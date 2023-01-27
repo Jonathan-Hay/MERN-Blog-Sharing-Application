@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+import cors from 'cors';
 
 import bloPostRouter from './routes/post-routes.js';
 import userRouter from './routes/user-routes.js';
@@ -7,7 +8,7 @@ import userRouter from './routes/user-routes.js';
 const PORT = 5000;
 
 const app = express();
-
+app.use(cors());
 app.use(express.json());
 
 
