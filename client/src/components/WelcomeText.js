@@ -4,13 +4,7 @@ import {
   Container,
   Box,
   Typography,
-  Chip,
   Avatar,
-  CardContent,
-  CardHeader,
-  CardMedia,
-  Snackbar,
-  IconButton,
 } from "@mui/material";
 
 const WelcomeText = () => {
