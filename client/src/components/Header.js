@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+import { authActions } from '../store/auth';
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -12,6 +14,8 @@ import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 function Header() {
   const isLoggedIn = useSelector((state) => state.isAuthenticated);
   console.log(isLoggedIn);
+
+  const dispatch = useDispatch();
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -53,7 +57,7 @@ function Header() {
 
           <Box display="flex" marginLeft="auto">
             {isLoggedIn && (
-              <Button LinkComponent={Link} to="/auth" color="warning">
+              <Button onClick={() => dispatch(authActions.logout())} LinkComponent={Link} to="/auth" color="warning">
                 Logout
               </Button>
             )}

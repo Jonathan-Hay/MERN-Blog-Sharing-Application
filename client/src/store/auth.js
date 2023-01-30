@@ -11,7 +11,7 @@ const authSlice = createSlice({
       state.isAuthenticated = true;
     },
     logout(state) {
-      localStorage.removeItem("userId");
+      localStorage.removeItem("userID");
       state.isAuthenticated = false;
     },
   },
