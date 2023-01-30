@@ -64,7 +64,7 @@ export const login = async (req, res, next) => {
   }
 
   if (!existingUser) {
-    res
+     return res
       .status(404)
       .json({ message: "No account assosisated with this email!" });
   }
@@ -74,9 +74,12 @@ export const login = async (req, res, next) => {
     existingUser.password
   );
 
+
   if (!passwordsAreEqual) {
-    return res.status(400).json({message: "Incorrect password!"})
+    return res.status(400).json({ message: "Incorrect password!" });
   }
 
-  return res.status(200).json({ message: "Login successful", user: existingUser });
+  return res
+    .status(200)
+    .json({ message: "Login successful", user: existingUser });
 };

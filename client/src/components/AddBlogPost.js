@@ -18,7 +18,7 @@ const AddBlogPost = () => {
   };
 
   const addPostHandler = () => {
-    //need to get id first
+
   };
 
   const submitHandler = (event) => {

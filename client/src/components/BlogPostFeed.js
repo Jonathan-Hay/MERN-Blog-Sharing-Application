@@ -26,6 +26,7 @@ const BlogPostFeed = () => {
         blogPosts.map((blogPost, index) => (
           <BlogPost
             title={blogPost.title}
+            key={index}
             author={blogPost.author.name}
             text={blogPost.text}
             image={blogPost.image}

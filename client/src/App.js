@@ -5,7 +5,7 @@ import Header from "./components/Header.js";
 import { Route, Routes } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { authActions } from './store/auth';
+import { authActions } from "./store/auth";
 
 import BlogPostFeed from "./components/BlogPostFeed.js";
 import AddBlogPost from "./components/AddBlogPost";
@@ -14,20 +14,17 @@ import UserBlogPosts from "./components/UserBlogPosts.js";
 import BlogPostDetail from "./components/BlogPostDetail.js";
 import WelcomeText from "./components/WelcomeText.js";
 
-
 function App() {
   const userIsLoggedIn = useSelector((state) => state.isAuthenticated);
   console.log(" logged in" + userIsLoggedIn);
 
   const dispatch = useDispatch();
 
-
-
   useEffect(() => {
     if (localStorage.getItem("userID")) {
       dispatch(authActions.login());
     }
-  }, [dispatch])
+  }, [dispatch]);
 
   return (
     <React.Fragment>
