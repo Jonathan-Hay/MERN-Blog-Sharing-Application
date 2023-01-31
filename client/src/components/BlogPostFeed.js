@@ -12,7 +12,6 @@ const BlogPostFeed = () => {
       .catch((e) => console.log(e));
 
     const data = await res.data;
-    console.log(data);
     return data;
   };
 
@@ -30,6 +29,8 @@ const BlogPostFeed = () => {
             author={blogPost.author.name}
             text={blogPost.text}
             image={blogPost.image}
+            id={blogPost._id}
+
           />
         ))}
     </React.Fragment>

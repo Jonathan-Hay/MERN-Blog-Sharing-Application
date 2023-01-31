@@ -34,18 +34,19 @@ const Auth = () => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    console.log("isSignup: " + isSignup);
 
+
+    //to do later: display error messages 
     if (isSignup) {
       authRequest("signup")
-        .then((data) => localStorage.setItem("userID", data.newUser._id))   //maybe rename newUser
+        .then((data) => localStorage.setItem("userID", data.newUser._id)) //maybe rename newUser
         .then(() => dispatch(authActions.login()))
         .then(() => navigate("/"));
     } else {
       authRequest()
         .then((data) => localStorage.setItem("userID", data.user._id))
         .then(() => dispatch(authActions.login()))
-        .then(() => navigate("/"));
+        .then(() => navigate("/")).catch((e) => console.log(e))
     }
   };
 
@@ -108,7 +109,7 @@ const Auth = () => {
           <Button
             variant="text"
             sx={{ borderRadius: 3, marginTop: 3 }}
-            onClick={()=>setIsSignup(!isSignup)}
+            onClick={() => setIsSignup(!isSignup)}
           >
             Change to {isSignup ? "Login" : "Signup"}
           </Button>

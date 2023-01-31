@@ -13,7 +13,7 @@ const UserBlogPosts = () => {
       .catch((e) => console.log(e));
 
     const data = await res.data;
-    console.log(data);
+    //console.log(data);
     return data;
   };
 
@@ -29,7 +29,7 @@ const UserBlogPosts = () => {
           <BlogPost
             title={blogPost.title}
             key={index}
-
+            id={blogPost._id}
             author={blogPost.author.name}
             text={blogPost.text}
             image={blogPost.image}

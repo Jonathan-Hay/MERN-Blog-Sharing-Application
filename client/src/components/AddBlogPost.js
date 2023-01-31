@@ -92,7 +92,6 @@ const AddBlogPost = () => {
             multiline={true}
             value={inputData.text}
             rows={5}
-            margin="auto"
             name="text"
             onChange={inputChangeHandler}
           />

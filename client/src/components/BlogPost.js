@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 
 import {
   Avatar,
@@ -21,6 +22,13 @@ export default function BlogPost(props) {
 
   const avatarString = props.author ? props.author.charAt(0) : "";
 
+  const navigate = useNavigate();
+
+
+  const editHandler = () => {
+    navigate(`/my-blogs/edit/${props.id}`);
+  }
+
   return (
     <Card
       sx={{
@@ -42,7 +50,7 @@ export default function BlogPost(props) {
         }
         action={
           ("isAuthor"==="isAuthor") && (
-            <Box display="flex">
+            <Box display="flex" onClick={editHandler}>
               <IconButton sx={{ marginLeft: "auto" }}>
                 <EditIcon color="warning" />
               </IconButton>
