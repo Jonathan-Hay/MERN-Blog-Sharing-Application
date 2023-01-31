@@ -66,14 +66,14 @@ const BlogPostDetail = () => {
   };
 
   const handleDelete = () => {
-    deleteHandler().then(() => navigate("/blog-feed"));
+    deleteHandler().then(() => navigate("/my-blogs"));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     handleEditPost()
       .then((data) => console.log(data))
-      .then(() => navigate("/blog-feed"));
+      .then(() => navigate("/my-blogs"));
   };
 
   return (

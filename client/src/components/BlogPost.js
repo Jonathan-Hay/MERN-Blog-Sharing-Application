@@ -19,15 +19,13 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 
 export default function BlogPost(props) {
-
   const avatarString = props.author ? props.author.charAt(0) : "";
 
   const navigate = useNavigate();
 
-
   const editHandler = () => {
     navigate(`/my-blogs/edit/${props.id}`);
-  }
+  };
 
   return (
     <Card
@@ -49,7 +47,7 @@ export default function BlogPost(props) {
           </Avatar>
         }
         action={
-          ("isAuthor"==="isAuthor") && (
+          props.userIsAuthor && (
             <Box display="flex" onClick={editHandler}>
               <IconButton sx={{ marginLeft: "auto" }}>
                 <EditIcon color="warning" />
@@ -62,18 +60,17 @@ export default function BlogPost(props) {
 
       <CardMedia
         sx={{ height: 140 }}
-        image= {props.image}
+        image={props.image}
         title="green iguana"
       />
 
-
       <CardContent>
-          <hr />
-          <br />
-          <Typography variant="body2" color="text.secondary">
-            <b>{props.author}</b> {": "} {props.text}
-          </Typography>
-        </CardContent>
+        <hr />
+        <br />
+        <Typography variant="body2" color="text.secondary">
+          <b>{props.author}</b> {": "} {props.text}
+        </Typography>
+      </CardContent>
     </Card>
   );
 }

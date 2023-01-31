@@ -30,6 +30,7 @@ const BlogPostFeed = () => {
             text={blogPost.text}
             image={blogPost.image}
             id={blogPost._id}
+            userIsAuthor={blogPost.author._id === localStorage.getItem("userID")}
 
           />
         ))}

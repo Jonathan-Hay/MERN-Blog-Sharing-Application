@@ -13,7 +13,7 @@ const UserBlogPosts = () => {
       .catch((e) => console.log(e));
 
     const data = await res.data;
-    //console.log(data);
+    
     return data;
   };
 
@@ -33,6 +33,7 @@ const UserBlogPosts = () => {
             author={blogPost.author.name}
             text={blogPost.text}
             image={blogPost.image}
+            userIsAuthor={blogPost.author === localStorage.getItem("userID")}
           />
         ))}
     </React.Fragment>
