@@ -34,9 +34,7 @@ const Auth = () => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-
-
-    //to do later: display error messages 
+    //to do later: display error messages
     if (isSignup) {
       authRequest("signup")
         .then((data) => localStorage.setItem("userID", data.newUser._id)) //maybe rename newUser
@@ -46,7 +44,8 @@ const Auth = () => {
       authRequest()
         .then((data) => localStorage.setItem("userID", data.user._id))
         .then(() => dispatch(authActions.login()))
-        .then(() => navigate("/")).catch((e) => console.log(e))
+        .then(() => navigate("/"))
+        .catch((e) => console.log(e));
     }
   };
 
@@ -72,7 +71,15 @@ const Auth = () => {
           padding={3.5}
           borderRadius={6}
         >
-          <Typography>Sign up</Typography>
+          <Typography
+            fontWeight={"bold"}
+            padding={2}
+            color="grey"
+            variant="h3"
+            textAlign="center"
+          >
+            {isSignup ? "Signup" : "Login"}
+          </Typography>
 
           {isSignup && (
             <TextField
