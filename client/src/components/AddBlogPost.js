@@ -39,7 +39,7 @@ const AddBlogPost = () => {
   const submitHandler = (event) => {
     console.log(inputData);
     event.preventDefault();
-    addPostHandler().then(data => console.log(data)).then(() => navigate("/blog-feed"));
+    addPostHandler().then(data => console.log(data)).then(() => navigate("/my-blogs"));
   };
 
   return (

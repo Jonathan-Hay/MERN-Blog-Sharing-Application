@@ -3,15 +3,11 @@ import { useNavigate } from "react-router-dom";
 
 import {
   Avatar,
-  Alert,
   Box,
   Card,
-  Button,
-  CardActions,
   CardContent,
   CardHeader,
   CardMedia,
-  Snackbar,
   IconButton,
   Typography,
 } from "@mui/material";
@@ -19,8 +15,18 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 
 export default function BlogPost(props) {
-  const avatarString = props.author ? props.author.charAt(0) : "";
+  const names = props.author.toUpperCase();
+  const namesSplit = names.split(" ", 2);
 
+  let avatarString;
+
+  if (namesSplit.size === 1) {
+    avatarString = props.author ? names.charAt(0) : "";
+  } else {
+    avatarString = props.author ? names.charAt(0) + " " + names.charAt(1): "";
+  }
+
+  
   const navigate = useNavigate();
 
   const editHandler = () => {

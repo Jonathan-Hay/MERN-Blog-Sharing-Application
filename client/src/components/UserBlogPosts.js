@@ -3,6 +3,7 @@ import axios from "axios";
 
 import BlogPost from "./BlogPost";
 import { Box, Typography } from "@mui/material";
+import { Container } from "@mui/system";
 
 const UserBlogPosts = () => {
   const [currentUser, setCurrentUser] = useState();
@@ -14,6 +15,7 @@ const UserBlogPosts = () => {
       .catch((e) => console.log(e));
 
     const data = await res.data;
+    console.log(data);
 
     return data;
   };
@@ -38,7 +40,9 @@ const UserBlogPosts = () => {
         textAlign="center"
         mb={5}
       >
-        <Typography variant="h3">{currentUser? currentUser.name : ""}'s Blog Posts</Typography>
+        <Typography variant="h3">
+          {currentUser ? currentUser.name : ""}'s Blog Posts
+        </Typography>
       </Box>
       {currentUser &&
         currentUser.blogs &&
@@ -47,12 +51,36 @@ const UserBlogPosts = () => {
             title={blogPost.title}
             key={index}
             id={blogPost._id}
-            author={blogPost.author.name}
+            author={currentUser.name}
             text={blogPost.text}
             image={blogPost.image}
             userIsAuthor={blogPost.author === localStorage.getItem("userID")}
           />
         ))}
+
+      {currentUser && currentUser.blogs.length === 0 && (
+        <Container maxWidth="md">
+          <Box py={10}>
+            <Box textAlign="center" mb={5}>
+              <Container maxWidth="sm">
+                <Box my={4}>
+                  <Typography variant="h3">No posts found!</Typography>
+                </Box>
+              </Container>
+              <Box>
+                <Typography
+                  variant="h4"
+                  color="textSecondary"
+                  paragraph={true}
+                  mt={4}
+                >
+                  Create a new blog post first.{" "}
+                </Typography>
+              </Box>
+            </Box>
+          </Box>
+        </Container>
+      )}
     </React.Fragment>
   );
 };
