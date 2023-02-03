@@ -13,11 +13,14 @@ import Auth from "./components/Auth.js";
 import UserBlogPosts from "./components/UserBlogPosts.js";
 import EditBlogPost from "./components/EditBlogPost.js";
 import WelcomeText from "./components/WelcomeText.js";
+import Error from './components/Error';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
+    errorElement: <Error />, //load this if error found (eg route that DNE)
+
     children: [
       {
         index: true,
