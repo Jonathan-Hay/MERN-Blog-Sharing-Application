@@ -10,18 +10,21 @@ import { authActions } from "./store/auth";
 // import BlogPostFeed from "./components/BlogPostFeed.js";
 import AddBlogPost from "./components/AddBlogPost";
 import Auth from "./components/Auth.js";
-import UserBlogPosts from "./components/UserBlogPosts.js";
 import EditBlogPost from "./components/EditBlogPost.js";
 import WelcomeText from "./components/WelcomeText.js";
 import Error from './components/Error';
 
 
 
-import {loader as blogPostFeedLoader } from './pages/BlogPostFeed.js';
+import { loader as blogPostFeedLoader } from './pages/BlogPostFeed.js';
+import {loader as usersBlogsLoader } from './pages/UsersOwnPosts';
+
   
   
   
 import BlogPostFeed from './pages/BlogPostFeed.js';
+import UsersOwnPosts from './pages/UsersOwnPosts.js';
+
 
 const router = createBrowserRouter([
   {
@@ -46,7 +49,8 @@ const router = createBrowserRouter([
       },
       {
         path: "my-blogs",
-        element: <UserBlogPosts />,
+        element: <UsersOwnPosts />,
+        loader: usersBlogsLoader,
       },
       {
         path: "my-blogs/edit/:id",

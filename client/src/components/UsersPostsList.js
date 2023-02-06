@@ -5,25 +5,7 @@ import BlogPost from "./BlogPost";
 import { Box, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 
-const UserBlogPosts = () => {
-  const [currentUser, setCurrentUser] = useState();
-
-  const userID = localStorage.getItem("userID");
-  const fetchUserByID = async () => {
-    const res = await axios
-      .get(`http://localhost:5000/post/user/${userID}`)
-      .catch((e) => console.log(e));
-
-    const data = await res.data;
-    console.log(data);
-
-    return data;
-  };
-
-  useEffect(() => {
-    fetchUserByID().then((data) => setCurrentUser(data.userAndBlogs));
-  }, []);
-
+const UserBlogPosts = ({ blogPosts }) => {
   return (
     <React.Fragment>
       <Box
@@ -41,24 +23,24 @@ const UserBlogPosts = () => {
         mb={5}
       >
         <Typography variant="h3">
-          {currentUser ? currentUser.name : ""}'s Blog Posts
+          {blogPosts ? blogPosts.name : ""}'s Blog Posts
         </Typography>
       </Box>
-      {currentUser &&
-        currentUser.blogs &&
-        currentUser.blogs.map((blogPost, index) => (
+      {blogPosts &&
+        blogPosts.blogs &&
+        blogPosts.blogs.map((blogPost, index) => (
           <BlogPost
             title={blogPost.title}
             key={index}
             id={blogPost._id}
-            author={currentUser.name}
+            author={blogPosts.name}
             text={blogPost.text}
             image={blogPost.image}
             userIsAuthor={blogPost.author === localStorage.getItem("userID")}
           />
         ))}
 
-      {currentUser && currentUser.blogs.length === 0 && (
+      {blogPosts && blogPosts.blogs.length === 0 && (
         <Container maxWidth="md">
           <Box py={10}>
             <Box textAlign="center" mb={5}>
