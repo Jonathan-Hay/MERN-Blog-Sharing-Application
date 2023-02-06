@@ -1,7 +1,7 @@
 import { useLoaderData, json } from "react-router-dom";
 import BlogPostsList from "../components/BlogPostsList";
 
-function EventsPage() {
+function BlogPostFeed() {
   const data = useLoaderData();
 
   const blogPosts = data.allBlogPosts;
@@ -10,7 +10,7 @@ function EventsPage() {
   
 }
 
-export default EventsPage;
+export default BlogPostFeed;
 
 export async function loader() {
   const response = await fetch("http://localhost:5000/post");

@@ -12,18 +12,17 @@ import AddBlogPost from "./components/AddBlogPost";
 import Auth from "./components/Auth.js";
 import EditBlogPost from "./components/EditBlogPost.js";
 import WelcomeText from "./components/WelcomeText.js";
-import Error from './components/Error';
+import Error from "./components/Error";
 
+import { loader as blogPostFeedLoader } from "./pages/BlogPostFeed.js";
+import { loader as usersBlogsLoader } from "./pages/UsersOwnPosts";
+import { loader as blogPostDataLoader } from "./pages/ModifyBlogPost";
 
+import BlogPostFeed from "./pages/BlogPostFeed.js";
+import UsersOwnPosts from "./pages/UsersOwnPosts.js";
+import ModifyBlogPost from "./pages/ModifyBlogPost.js";
 
-import { loader as blogPostFeedLoader } from './pages/BlogPostFeed.js';
-import {loader as usersBlogsLoader } from './pages/UsersOwnPosts';
-
-  
-  
-  
-import BlogPostFeed from './pages/BlogPostFeed.js';
-import UsersOwnPosts from './pages/UsersOwnPosts.js';
+import { action as EditBlogPostAction } from './components/EditBlogPost';
 
 
 const router = createBrowserRouter([
@@ -41,8 +40,8 @@ const router = createBrowserRouter([
         path: "blog-feed",
         element: <BlogPostFeed />,
         loader: blogPostFeedLoader,
-
       },
+
       {
         path: "blogs/new",
         element: <AddBlogPost />,
@@ -54,13 +53,15 @@ const router = createBrowserRouter([
       },
       {
         path: "my-blogs/edit/:id",
-        element: <EditBlogPost />,
+        element: <ModifyBlogPost />,
+        loader: blogPostDataLoader,
+        action: EditBlogPostAction,
+
       },
       {
         path: "auth",
         element: <Auth />,
       },
-
     ],
   },
 ]);

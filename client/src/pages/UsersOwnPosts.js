@@ -1,16 +1,15 @@
 import { useLoaderData, json } from "react-router-dom";
 import UsersPostsList from "../components/UsersPostsList";
 
-function EventsPage() {
-    const data = useLoaderData();
-    console.log(data);
+function UsersOwnPosts() {
+  const data = useLoaderData();
 
-    const usersBlogPosts = data.userAndBlogs;
+  const usersBlogPosts = data.userAndBlogs;
 
-    return <UsersPostsList blogPosts={usersBlogPosts} />;
+  return <UsersPostsList blogPosts={usersBlogPosts} />;
 }
 
-export default EventsPage;
+export default UsersOwnPosts;
 
 export async function loader() {
   const userID = localStorage.getItem("userID");
@@ -25,7 +24,7 @@ export async function loader() {
       }
     );
   } else {
-      console.log(response)
+    console.log(response);
     return response;
   }
 }
