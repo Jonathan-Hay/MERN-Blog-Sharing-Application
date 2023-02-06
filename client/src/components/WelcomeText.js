@@ -1,31 +1,7 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-
+import React from "react";
 import { Container, Box, Typography, Avatar } from "@mui/material";
-import { current } from "@reduxjs/toolkit";
 
-const WelcomeText = () => {
-  const [currentUser, setCurrentUser] = useState();
-
-  const userID = localStorage.getItem("userID");
-
-  const fetchUserByID = async () => {
-    const res = await axios
-      .get(`http://localhost:5000/post/user/${userID}`)
-      .catch((e) => console.log(e));
-
-    const data = await res.data;
-    return data;
-  };
-
-  useEffect(() => {
-    if (!userID) {
-      return;
-    }
-
-    fetchUserByID().then((data) => setCurrentUser(data.userAndBlogs));
-  }, [userID]);
-
+const WelcomeText = ({ currentUser }) => {
   return (
     <section>
       <Container maxWidth="md">

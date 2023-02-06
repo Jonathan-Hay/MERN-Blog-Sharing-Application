@@ -13,7 +13,7 @@ const postRouter = express.Router();
 
 postRouter.get("/", getAllBlogPosts);
 postRouter.post("/new", newBlogPost);
-postRouter.put("/edit/:id", editBlogPost);
+postRouter.patch("/edit/:id", editBlogPost);
 postRouter.get("/:id", getPostByID);
 postRouter.delete("/:id", removeBlogPost);
 postRouter.get("/user/:id", getUserByID);  //perhaps move
