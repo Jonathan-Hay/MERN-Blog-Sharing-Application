@@ -7,13 +7,21 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { authActions } from "./store/auth";
 
-import BlogPostFeed from "./components/BlogPostFeed.js";
+// import BlogPostFeed from "./components/BlogPostFeed.js";
 import AddBlogPost from "./components/AddBlogPost";
 import Auth from "./components/Auth.js";
 import UserBlogPosts from "./components/UserBlogPosts.js";
 import EditBlogPost from "./components/EditBlogPost.js";
 import WelcomeText from "./components/WelcomeText.js";
 import Error from './components/Error';
+
+
+
+import {loader as blogPostFeedLoader } from './pages/BlogPostFeed.js';
+  
+  
+  
+import BlogPostFeed from './pages/BlogPostFeed.js';
 
 const router = createBrowserRouter([
   {
@@ -29,6 +37,8 @@ const router = createBrowserRouter([
       {
         path: "blog-feed",
         element: <BlogPostFeed />,
+        loader: blogPostFeedLoader,
+
       },
       {
         path: "blogs/new",

@@ -1,27 +1,9 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-
+import React from "react";
 import BlogPost from "./BlogPost";
 import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
 
-const BlogPostFeed = () => {
-  
-  const [blogPosts, setBlogPosts] = useState();
-
-  const sendRequest = async () => {
-    const res = await axios
-      .get("http://localhost:5000/post")
-      .catch((e) => console.log(e));
-
-    const data = await res.data;
-    return data;
-  };
-
-  useEffect(() => {
-    sendRequest().then((data) => setBlogPosts(data.allBlogPosts));
-  }, []);
-
+const BlogPostFeed = (blogPosts) => {
   return (
     <React.Fragment>
       <Box
@@ -54,7 +36,6 @@ const BlogPostFeed = () => {
             }
           />
         ))}
-      
     </React.Fragment>
   );
 };
