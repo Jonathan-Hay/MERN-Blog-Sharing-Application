@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate, useParams, Form, redirect, json } from "react-router-dom";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
@@ -84,25 +84,21 @@ const BlogPostDetail = ({ blogPost }) => {
 };
 
 export async function action({ request, params }) {
-  const method = request.method;
   const data = await request.formData();
-  console.log(data);
 
-  const eventData = {
+  const blogPostdata = {
     title: data.get("title"),
     text: data.get("text"),
   };
 
-  console.log(eventData);
-
   const id = params.id;
 
   const response = await fetch(`http://localhost:5000/post/edit/${id}`, {
-    method: method,
+    method: 'PATCH',
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(eventData),
+    body: JSON.stringify(blogPostdata),
   });
 
   if (response.status === 422) {

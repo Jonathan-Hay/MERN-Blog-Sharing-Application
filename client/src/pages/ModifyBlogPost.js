@@ -1,5 +1,5 @@
 import { useLoaderData, json } from "react-router-dom";
-import EditBlogPost from "../components/EditBlogPost";
+import EditBlogPost from "../components/EditBlogPostForm";
 
 function ModifyBlogPost() {
   const data = useLoaderData();

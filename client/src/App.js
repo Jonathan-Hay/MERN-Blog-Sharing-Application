@@ -8,9 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "./store/auth";
 
 // import BlogPostFeed from "./components/BlogPostFeed.js";
-import AddBlogPost from "./components/AddBlogPost";
 import Auth from "./components/Auth.js";
-import EditBlogPost from "./components/EditBlogPost.js";
 import WelcomeText from "./components/WelcomeText.js";
 import Error from "./components/Error";
 
@@ -21,8 +19,11 @@ import { loader as blogPostDataLoader } from "./pages/ModifyBlogPost";
 import BlogPostFeed from "./pages/BlogPostFeed.js";
 import UsersOwnPosts from "./pages/UsersOwnPosts.js";
 import ModifyBlogPost from "./pages/ModifyBlogPost.js";
+import NewBlogPost from "./pages/NewBlogPost.js";
 
-import { action as EditBlogPostAction } from './components/EditBlogPost';
+
+import { action as EditBlogPostAction } from "./components/EditBlogPostForm";
+import { action as AddBlogPostAction } from "./components/AddBlogPostForm";
 
 
 const router = createBrowserRouter([
@@ -44,7 +45,8 @@ const router = createBrowserRouter([
 
       {
         path: "blogs/new",
-        element: <AddBlogPost />,
+        element: <NewBlogPost />,
+        action: AddBlogPostAction
       },
       {
         path: "my-blogs",
@@ -56,7 +58,6 @@ const router = createBrowserRouter([
         element: <ModifyBlogPost />,
         loader: blogPostDataLoader,
         action: EditBlogPostAction,
-
       },
       {
         path: "auth",

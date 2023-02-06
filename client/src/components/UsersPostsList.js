@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 
 import BlogPost from "./BlogPost";
 import { Box, Typography } from "@mui/material";

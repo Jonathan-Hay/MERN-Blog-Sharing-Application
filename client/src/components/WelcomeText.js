@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import { Container, Box, Typography, Avatar } from "@mui/material";
-import { current } from "@reduxjs/toolkit";
 
 const WelcomeText = () => {
   const [currentUser, setCurrentUser] = useState();
