@@ -6,13 +6,16 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "./store/auth";
 
-import Auth from "./components/Auth.js";
 import Error from "./components/Error";
 
 import { loader as blogPostFeedLoader } from "./pages/BlogPostFeed.js";
 import { loader as usersBlogsLoader } from "./pages/UsersOwnPosts";
 import { loader as blogPostDataLoader } from "./pages/ModifyBlogPost";
 import { loader as userAvatarLoader } from "./pages/Homepage";
+import { loader as authCheckLoader } from "./pages/NewBlogPost";
+
+
+import { getAuthToken } from './util/auth';
 
 
 import BlogPostFeed from "./pages/BlogPostFeed.js";
@@ -20,11 +23,16 @@ import UsersOwnPosts from "./pages/UsersOwnPosts.js";
 import ModifyBlogPost from "./pages/ModifyBlogPost.js";
 import NewBlogPost from "./pages/NewBlogPost.js";
 import Homepage from "./pages/Homepage.js";
+import Authentication from "./pages/Authentication.js";
+
 
 
 
 import { action as EditBlogPostAction } from "./components/EditBlogPostForm";
 import { action as AddBlogPostAction } from "./components/AddBlogPostForm";
+import { action as authenticateAction } from "./pages/Authentication";
+
+
 
 
 const router = createBrowserRouter([
@@ -32,6 +40,8 @@ const router = createBrowserRouter([
     path: "/",
     element: <RootLayout />,
     errorElement: <Error />, 
+    id: 'root',
+    loader: getAuthToken,
 
     children: [
       {
@@ -48,7 +58,8 @@ const router = createBrowserRouter([
       {
         path: "blogs/new",
         element: <NewBlogPost />,
-        action: AddBlogPostAction
+        action: AddBlogPostAction,
+        loader: authCheckLoader
       },
       {
         path: "my-blogs",
@@ -63,7 +74,8 @@ const router = createBrowserRouter([
       },
       {
         path: "auth",
-        element: <Auth />,
+        element: <Authentication />,
+        action: authenticateAction,
       },
     ],
   },
@@ -73,13 +85,13 @@ function App() {
   const userIsLoggedIn = useSelector((state) => state.isAuthenticated);
   console.log(" logged in" + userIsLoggedIn);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (localStorage.getItem("userID")) {
-      dispatch(authActions.login());
-    }
-  }, [dispatch]);
+  // useEffect(() => {
+  //   if (localStorage.getItem("userID")) {
+  //     dispatch(authActions.login());
+  //   }
+  // }, [dispatch]);
 
   return <RouterProvider router={router} />;
 }

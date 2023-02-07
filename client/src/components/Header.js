@@ -1,21 +1,25 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { authActions } from '../store/auth';
+import { authActions } from "../store/auth";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 
-function Header() {
-  const isLoggedIn = useSelector((state) => state.isAuthenticated);
-  console.log(isLoggedIn);
+import { useRouteLoaderData } from 'react-router-dom';
 
-  const dispatch = useDispatch();
+
+function Header() {
+  // const isLoggedIn = useSelector((state) => state.isAuthenticated);
+  // console.log(isLoggedIn);
+
+  const authToken = useRouteLoaderData('root');
+
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -36,7 +40,7 @@ function Header() {
           >
             YouBlog
           </Typography>
-          {isLoggedIn && (
+          {authToken && (
             <Box
               display="flex"
               marginLeft={"auto"}
@@ -56,18 +60,37 @@ function Header() {
           )}
 
           <Box display="flex" marginLeft="auto">
-            {isLoggedIn && (
-              <Button onClick={() => dispatch(authActions.logout())} LinkComponent={Link} to="/auth" color="warning">
+            {authToken && (
+              <Button
+                onClick={() => {
+                  localStorage.removeItem("token");
+                  localStorage.removeItem("expiration");
+                  localStorage.removeItem("userID");
+
+                  return redirect("/");
+                }}
+                LinkComponent={Link}
+                to="/auth?type=login"
+                color="warning"
+              >
                 Logout
               </Button>
             )}
 
-            {!isLoggedIn && (
+            {!authToken && (
               <React.Fragment>
-                <Button LinkComponent={Link} to="/auth" color="warning">
+                <Button
+                  LinkComponent={Link}
+                  to="/auth?type=login"
+                  color="warning"
+                >
                   Login
                 </Button>
-                <Button LinkComponent={Link} to="/auth" color="warning">
+                <Button
+                  LinkComponent={Link}
+                  to="/auth?type=signup"
+                  color="warning"
+                >
                   Signup
                 </Button>
               </React.Fragment>

@@ -15,12 +15,30 @@ const BlogPostDetail = ({ blogPost }) => {
   const navigate = useNavigate();
   const postID = useParams().id;
 
+  //TO DO: move to a loader and authenticate
   const deleteHandler = async () => {
-    const res = await axios
-      .delete(`http://localhost:5000/post/${postID}`)
-      .catch((err) => console.log(err));
-    const data = await res.data;
-    return data;
+    // const res = await axios
+    //   .delete(`http://localhost:5000/post/${postID}`)
+    //   .catch((err) => console.log(err));
+    // const data = await res.data;
+    // return data;
+
+    const token = localStorage.getItem("token");
+    const response = await fetch(`http://localhost:5000/post/${postID}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+
+    if (!response.ok) {
+      throw json(
+        { message: "Could not delete post." },
+        {
+          status: 500,
+        }
+      );
+    }
   };
 
   const handleDelete = () => {
@@ -92,11 +110,13 @@ export async function action({ request, params }) {
   };
 
   const id = params.id;
+  const token = localStorage.getItem("token");
 
   const response = await fetch(`http://localhost:5000/post/edit/${id}`, {
-    method: 'PATCH',
+    method: "PATCH",
     headers: {
       "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
     },
     body: JSON.stringify(blogPostdata),
   });

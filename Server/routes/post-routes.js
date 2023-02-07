@@ -1,4 +1,6 @@
 import express from "express";
+import { checkAuth } from '../middlewares/checkAuth.js';
+
 import {
     getAllBlogPosts,
     newBlogPost,
@@ -11,11 +13,14 @@ import {
 
 const postRouter = express.Router();
 
+postRouter.get("/user/:id", getUserByID);  //perhaps move
 postRouter.get("/", getAllBlogPosts);
+postRouter.get("/:id", getPostByID);
+
+postRouter.use(checkAuth);
+
 postRouter.post("/new", newBlogPost);
 postRouter.patch("/edit/:id", editBlogPost);
-postRouter.get("/:id", getPostByID);
 postRouter.delete("/:id", removeBlogPost);
-postRouter.get("/user/:id", getUserByID);  //perhaps move
 
 export default postRouter;

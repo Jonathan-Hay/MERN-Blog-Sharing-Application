@@ -26,15 +26,27 @@ const WelcomeText = ({ currentUser }) => {
               )}
             </Container>
             <Box>
-              <Typography
-                variant="h4"
-                color="textSecondary"
-                paragraph={true}
-                mt={4}
-              >
-                Get started by clicking your feed to see the blogs of other
-                users!
-              </Typography>
+              {currentUser.newUser && (
+                <Typography
+                  variant="h4"
+                  color="textSecondary"
+                  paragraph={true}
+                  mt={4}
+                >
+                  Get started by creating an account or logging in!
+                </Typography>
+              )}
+              {!currentUser.newUser && (
+                <Typography
+                  variant="h4"
+                  color="textSecondary"
+                  paragraph={true}
+                  mt={4}
+                >
+                  Get started by clicking your feed to see the blogs of other
+                  users!
+                </Typography>
+              )}
             </Box>
           </Box>
         </Box>

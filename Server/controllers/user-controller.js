@@ -1,5 +1,8 @@
 import User from "../model/User.js";
 import bcrypt from "bcryptjs";
+import jwt from 'jsonwebtoken';
+import { createToken } from '../middlewares/checkAuth.js';
+
 
 export const signup = async (req, res, next) => {
   const { name, email, password } = req.body;
@@ -32,8 +35,9 @@ export const signup = async (req, res, next) => {
   } catch (e) {
     return console.log(e);
   }
+  const token = createToken(email);
 
-  return res.status(201).json({ newUser });
+  return res.status(201).json({ user: newUser, token });
 };
 
 export const getAllUsers = async (req, res, next) => {
@@ -79,7 +83,11 @@ export const login = async (req, res, next) => {
     return res.status(400).json({ message: "Incorrect password!" });
   }
 
+
+  const token = createToken(email);
+
+
   return res
     .status(200)
-    .json({ message: "Login successful", user: existingUser });
+    .json({ message: "Login successful", user: existingUser, token });
 };
