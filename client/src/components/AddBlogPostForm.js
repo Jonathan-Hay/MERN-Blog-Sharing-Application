@@ -5,6 +5,7 @@ import { Form, redirect, json } from "react-router-dom";
 const labelStyles = { mb: 1, mt: 3, fontSize: "20px", fontWeight: "bold" };
 
 const AddBlogPost = () => {
+
   return (
     <React.Fragment>
       <Form method={"POST"}>
@@ -65,12 +66,14 @@ export async function action({ request }) {
     author: localStorage.getItem("userID"),
   };
 
-  console.log(newPostData);
+  const token = localStorage.getItem("token");
 
   const response = await fetch("http://localhost:5000/post/new/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      'Authorization': 'Bearer ' + token
+
     },
     body: JSON.stringify(newPostData),
   });

@@ -114,6 +114,7 @@ export const removeBlogPost = async (req, res, next) => {
   if (!blogPost) {
     res.status(500).json({ message: "Post not found" });
   }
+  console.log("deleted");
 
   return res.status(200).json({ message: "Deleted blog post!" });
 };
