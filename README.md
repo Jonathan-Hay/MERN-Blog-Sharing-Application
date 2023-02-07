@@ -1,4 +1,4 @@
-# MERN-Blog-Sharing-Application :notebook_with_decorative_cover:
+# :notebook_with_decorative_cover: MERN-Blog-Sharing-Application
 
 A full-stack application for creating and sharing blog posts. Authentication with JsonWebToken.
 
