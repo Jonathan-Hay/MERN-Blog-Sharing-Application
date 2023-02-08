@@ -1,11 +1,8 @@
 import "./App.css";
-import React, { useEffect } from "react";
+import React from "react";
 
 import RootLayout from "./components/RootLayout.js";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { authActions } from "./store/auth";
-
 import Error from "./components/Error";
 
 import { loader as blogPostFeedLoader } from "./pages/BlogPostFeed.js";
@@ -82,17 +79,6 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  const userIsLoggedIn = useSelector((state) => state.isAuthenticated);
-  console.log(" logged in" + userIsLoggedIn);
-
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   if (localStorage.getItem("userID")) {
-  //     dispatch(authActions.login());
-  //   }
-  // }, [dispatch]);
-
   return <RouterProvider router={router} />;
 }
 

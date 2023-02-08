@@ -1,6 +1,5 @@
 import React from "react";
 import AddBlogPost from "../components/AddBlogPostForm";
-import { getAuthToken } from "../util/auth";
 import { redirect } from "react-router-dom";
 
 const NewBlogPost = () => {

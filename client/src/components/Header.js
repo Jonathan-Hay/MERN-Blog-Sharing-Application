@@ -1,8 +1,4 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-
-import { authActions } from "../store/auth";
-
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -11,15 +7,10 @@ import Button from "@mui/material/Button";
 import { Link, redirect } from "react-router-dom";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 
-import { useRouteLoaderData } from 'react-router-dom';
-
+import { useRouteLoaderData } from "react-router-dom";
 
 function Header() {
-  // const isLoggedIn = useSelector((state) => state.isAuthenticated);
-  // console.log(isLoggedIn);
-
-  const authToken = useRouteLoaderData('root');
-
+  const authToken = useRouteLoaderData("root");
 
   return (
     <Box sx={{ flexGrow: 1 }}>

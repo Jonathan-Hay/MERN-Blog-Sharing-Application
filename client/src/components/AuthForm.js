@@ -1,55 +1,11 @@
 import { Button, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useState } from "react";
-import axios from "axios";
-import { authActions } from "../store/auth";
-import { useDispatch } from "react-redux";
-import { useNavigate, Link, useSearchParams, Form } from "react-router-dom";
+import React from "react";
+import { Link, useSearchParams, Form } from "react-router-dom";
 
 const Auth = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
   const [searchParams] = useSearchParams();
   const isSignup = searchParams.get("type") === "signup";
-
-  const [authInputs, setAuthInputs] = useState({
-    email: "",
-    name: "",
-    password: "",
-  });
-
-  const authRequest = async (type = "login") => {
-    const res = await axios
-      .post(`http://localhost:5000/user/${type}`, {
-        email: authInputs.email,
-        name: authInputs.name,
-        password: authInputs.password,
-      })
-      .catch((e) => console.log(e));
-
-    const data = await res.data;
-    console.log(data);
-    return data;
-  };
-
-  const submitHandler = (event) => {
-    event.preventDefault();
-
-    //to do later: display error messages
-    if (isSignup) {
-      authRequest("signup")
-        .then((data) => localStorage.setItem("userID", data.newUser._id)) //maybe rename newUser
-        .then(() => dispatch(authActions.login()))
-        .then(() => navigate("/"));
-    } else {
-      authRequest()
-        .then((data) => localStorage.setItem("userID", data.user._id))
-        .then(() => dispatch(authActions.login()))
-        .then(() => navigate("/"))
-        .catch((e) => console.log(e));
-    }
-  };
 
   return (
     <React.Fragment>
