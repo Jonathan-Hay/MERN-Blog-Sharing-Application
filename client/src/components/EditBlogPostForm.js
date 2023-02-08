@@ -6,7 +6,6 @@ import {
   IconButton,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import axios from "axios";
 import React from "react";
 import { useNavigate, useParams, Form, redirect, json } from "react-router-dom";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
@@ -15,14 +14,8 @@ const BlogPostDetail = ({ blogPost }) => {
   const navigate = useNavigate();
   const postID = useParams().id;
 
-  //TO DO: move to a loader and authenticate
+  //TO DO: move to a loader
   const deleteHandler = async () => {
-    // const res = await axios
-    //   .delete(`http://localhost:5000/post/${postID}`)
-    //   .catch((err) => console.log(err));
-    // const data = await res.data;
-    // return data;
-
     const token = localStorage.getItem("token");
     const response = await fetch(`http://localhost:5000/post/${postID}`, {
       method: "DELETE",
