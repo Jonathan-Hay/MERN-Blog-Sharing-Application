@@ -49,6 +49,7 @@ const Auth = () => {
             margin="normal"
             placeholder="password"
             name="password"
+            type="password"
           />
           <Button
             type="submit"

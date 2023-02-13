@@ -1,6 +1,6 @@
 import React from "react";
 import BlogPost from "./BlogPost";
-import { Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 
 const BlogPostFeed = ({ blogPosts }) => {
@@ -37,6 +37,30 @@ const BlogPostFeed = ({ blogPosts }) => {
             }
           />
         ))}
+      
+      {blogPosts && blogPosts.length === 0 && (
+        <Container maxWidth="md">
+          <Box py={10}>
+            <Box textAlign="center" mb={5}>
+              <Container maxWidth="sm">
+                <Box my={4}>
+                  <Typography variant="h3">No posts found!</Typography>
+                </Box>
+              </Container>
+              <Box>
+                <Typography
+                  variant="h4"
+                  color="textSecondary"
+                  paragraph={true}
+                  mt={4}
+                >
+                  Nobody has added any blog posts! 
+                </Typography>
+              </Box>
+            </Box>
+          </Box>
+        </Container>
+      )}
     </React.Fragment>
   );
 };

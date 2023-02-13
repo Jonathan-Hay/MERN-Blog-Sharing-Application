@@ -9,12 +9,10 @@ const Authentication = () => {
 export default Authentication;
 
 export async function action({ request }) {
-  const searchParams = new URL(request.url).searchParams; //cant get the search params since we are not in a component but can use new URL
+  const searchParams = new URL(request.url).searchParams;
   const type = searchParams.get("type") || "login";
 
-  //incase user types some other value in.
   if (type !== "login" && type !== "signup") {
-    //alternativly could set mode to signup
     throw json({ message: "Unsupported mode." }, { status: 422 });
   }
 
