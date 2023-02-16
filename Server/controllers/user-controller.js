@@ -7,17 +7,29 @@ import { createToken } from '../middlewares/checkAuth.js';
 export const signup = async (req, res, next) => {
   const { name, email, password } = req.body;
 
+  let errors = {};
+
+
   let existingUser;
 
   try {
     existingUser = await User.findOne({ email });
+
+    if (existingUser) {
+      errors.email = 'An account associated with that email already exists.';
+    }
   } catch (e) {
     return console.log(e);
   }
 
-  if (existingUser) {
-    return res.status(400).json({
-      message: "An account associated with that email already exists.",
+  if (password.length < 8) {
+    errors.password = 'Please enter a password with at least 8 characters.';
+  }
+
+  if (Object.keys(errors).length > 0) {
+    return res.status(422).json({
+      message: 'Incorrect details',
+      errors,
     });
   }
 

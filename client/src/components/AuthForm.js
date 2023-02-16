@@ -1,15 +1,16 @@
 import { Button, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
-import { Link, useSearchParams, Form } from "react-router-dom";
+import { Link, useSearchParams, Form, useActionData } from "react-router-dom";
 
 const Auth = () => {
   const [searchParams] = useSearchParams();
   const isSignup = searchParams.get("type") === "signup";
+  const errorData = useActionData();
 
   return (
     <React.Fragment>
-      <Form method="post" >
+      <Form method="post">
         <Box
           display="flex"
           flexDirection="column"
@@ -32,19 +33,25 @@ const Auth = () => {
             {isSignup ? "Signup" : "Login"}
           </Typography>
 
-          {isSignup && (
-            <TextField
-              margin="normal"
-              placeholder="account name"
-              name="name"
-            />
+          {errorData && errorData.message && (
+            <Typography fontWeight={"bold"} padding={2}>
+              {errorData.message}:
+            </Typography>
           )}
 
-          <TextField
-            margin="normal"
-            placeholder="email"
-            name="email"
-          />
+          {errorData && errorData.errors && (
+            <ul>
+              {Object.values(errorData.errors).map((error) => (
+                <li key={error}>{error}</li>
+              ))}
+            </ul>
+          )}
+
+          {isSignup && (
+            <TextField margin="normal" placeholder="account name" name="name" />
+          )}
+
+          <TextField margin="normal" placeholder="email" name="email" />
           <TextField
             margin="normal"
             placeholder="password"
@@ -62,7 +69,6 @@ const Auth = () => {
           <Button
             LinkComponent={Link}
             sx={{ borderRadius: 3, marginTop: 3 }}
-
             to={`?type=${isSignup ? "login" : "signup"}`}
             color="warning"
           >
