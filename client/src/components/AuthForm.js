@@ -35,7 +35,7 @@ const Auth = () => {
 
           {errorData && errorData.message && (
             <Typography fontWeight={"bold"} padding={2}>
-              {errorData.message}:
+              {errorData.message}
             </Typography>
           )}
 
